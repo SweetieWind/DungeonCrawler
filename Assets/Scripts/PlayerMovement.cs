@@ -25,62 +25,20 @@ public class PlayerMovement : MonoBehaviour
         RB2D.velocity = velocity;
         flipSprite(horizontalInput);
         spriteUpAndDown(verticalInput);
-        playerWalking(horizontalInput, verticalInput);
     }
     private void flipSprite(float horizontal)
     {
+        animator.SetFloat("horizontalSpeed", Mathf.Abs(horizontal));
         if (horizontal < 0) {
             sprite.flipX = true;
-            isLookingRight();
         }
         else if (horizontal > 0)
         {
             sprite.flipX = false;
-            isLookingRight();
         }
     }
     void spriteUpAndDown(float vertical)
     {
-        if (vertical< 0)
-        {
-            isLookingFront();
-        }
-        else if (vertical > 0)
-        {
-            isLookingUp();
-        }
-    }
-    void playerWalking(float horizontal, float vertical)
-    {
-        if(horizontal == 0 && vertical== 0)
-        {
-            stopWalking();
-        }
-        else
-        {
-            isWalking();
-        }
-    }
-    void isLookingRight()
-    {
-        animator.SetTrigger("seeingSide");
-    }
-    void isLookingUp()
-    {
-        animator.SetTrigger("seingTop");
-
-    }
-    void isLookingFront()
-    {
-        animator.SetTrigger("seingFront");
-
-    }
-    void isWalking()
-    {
-        animator.SetBool("isWalking", true);
-    }
-    void stopWalking()
-    {
-        animator.SetBool("IsWalking", false);
+        animator.SetFloat("verticalSpeed", vertical);
     }
 }
